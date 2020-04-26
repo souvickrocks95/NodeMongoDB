@@ -11,8 +11,14 @@ var UserSchema = new mongoose.Schema({
   token : String
 });
 
+UserSchema.virtual('tasks', {
+  ref : 'Task',
+  localField:'_id', 
+  foreignField: 'owner'
+});
+
 UserSchema.methods.toJSON = function(){
-  return {name : this.name, email : this.email};
+  return {name : this.name, email : this.email, tasks : this.tasks};
 }
 
 UserSchema.methods.generateToken = function(){

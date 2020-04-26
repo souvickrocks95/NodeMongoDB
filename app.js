@@ -5,7 +5,6 @@ var UserController = require('./controller/usercontroller');
 const authController = require('./controller/authController');
 const taskController = require('./controller/taskController');
 
-
 app.use((req,res,next) => {
     console.log(`This is request : ${req.method} and ${req.url}`);
     next();

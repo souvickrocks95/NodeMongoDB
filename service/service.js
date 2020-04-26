@@ -46,7 +46,11 @@ var service = {
         if (!data){
           obs.error('Error');
         }else{
-          obs.next(data);
+          data.populate('tasks')
+          .execPopulate(() => {
+              obs.next(data);
+              obs.complete();
+            })
         }
       })
     }

@@ -22,7 +22,10 @@ router.post('/', auth, function (req, res) {
 });
 
 router.get('/', auth, function (req, res) {
-        service.findAll(req.user)
+        let param = req.query.completed;
+        let pageSize = req.query.pageSize && parseInt(req.query.pageSize) || 10;
+        let pageNo =  req.query.pageNo && parseInt(req.query.pageNo) || 1;        
+        service.findAll(req.user, param, {pageSize, pageNo})
         .subscribe({
             next(data){
                 res.status(200).send(data);
@@ -44,5 +47,17 @@ router.get('/:id', auth, function (req, res) {
         }
     })
 });
+
+router.get('/complete/:id', auth, function(req, res) {
+    service.completeTask(req.params.id)
+    .subscribe({
+        next(data){
+            res.status(200).send(data);
+        },
+        error(err){ 
+            res.status(404).send({error : err});
+        }
+    })
+})
 
 module.exports = router;

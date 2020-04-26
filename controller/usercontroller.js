@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const func = require('../middleware/userMiddleware');
 var service = require('../service/service');
 const auth = require('../middleware/authorization');
+const upload = require('../multConfig');
 
 let router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -36,4 +37,9 @@ router.get('/me', auth, function (req, res) {
         error : (err) => res.status(500).send({error : err})
     })
 });
+
+router.post('/upload', auth, upload.single('avatar'), function (req, res) {
+    res.status(200).send('Uploaded..');
+});
+
 module.exports = router;

@@ -14,18 +14,26 @@ var service = {
         });
       });
     },
-    findAll : (user) => {
+    findAll : (user, param, pagination) => {
         return Observable.create(ob => {
-            taskModel.find({owner : user._id},(err,data) => {
-                if(err){
-                    ob.error(err);
-                }else{
-                    ob.next(data);
-                }
-                ob.complete();
-            })
+        if(param){
+            var query = {owner: user._id, completed : param === 'true'};
+        }else{
+            var query = {owner: user._id};
+        }
+        taskModel.find(query)
+        .skip((pagination.pageNo - 1)* pagination.pageSize)
+        .limit(pagination.pageSize)
+        .exec((err,data) => {
+            if(err){
+                ob.error(err);
+            }else{
+                ob.next(data);
+            }
+            ob.complete();
+        });
         })
-    },
+      },
     findTask : (taksId) => {
         return Observable.create(ob => {
             taskModel.findById(taksId,(err,data) => {
@@ -45,7 +53,21 @@ var service = {
                 }
             })
         })
-    }
+    },
+    completeTask : function(id) {
+
+        return Observable.create(obs => {
+            taskModel.findByIdAndUpdate(id, {completed : true}, (err, data)=> {
+                if(err){
+                    obs.error(err);
+                }
+                else{
+                    obs.next(data);
+                }
+                obs.complete();
+            })
+        })
+    } 
 }
 
 module.exports = service;
