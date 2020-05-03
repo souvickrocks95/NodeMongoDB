@@ -21,9 +21,11 @@ var service = {
         }else{
             var query = {owner: user._id};
         }
+        let sortCiterial = {createdDate : 'asc', description : 1};
         taskModel.find(query)
         .skip((pagination.pageNo - 1)* pagination.pageSize)
         .limit(pagination.pageSize)
+        .sort(sortCiterial)
         .exec((err,data) => {
             if(err){
                 ob.error(err);

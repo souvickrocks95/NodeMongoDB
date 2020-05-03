@@ -21,7 +21,7 @@ router.post('/', auth, function (req, res) {
       });
 });
 
-router.get('/', auth, function (req, res) {
+router.get('/', auth, function (req, res) { 
         let param = req.query.completed;
         let pageSize = req.query.pageSize && parseInt(req.query.pageSize) || 10;
         let pageNo =  req.query.pageNo && parseInt(req.query.pageNo) || 1;        

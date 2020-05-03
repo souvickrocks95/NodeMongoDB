@@ -8,7 +8,10 @@ var UserSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  token : String
+  token : String,
+  document : Buffer,
+  documentName : String,
+  mimetype : String
 });
 
 UserSchema.virtual('tasks', {
@@ -18,7 +21,7 @@ UserSchema.virtual('tasks', {
 });
 
 UserSchema.methods.toJSON = function(){
-  return {name : this.name, email : this.email, tasks : this.tasks};
+  return {name : this.name, email : this.email, tasks : this.tasks, docUrl : this.docUrl};
 }
 
 UserSchema.methods.generateToken = function(){
