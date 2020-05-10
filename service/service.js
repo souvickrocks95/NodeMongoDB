@@ -1,6 +1,5 @@
 var User = require('../schema/user');
 var {Observable, Subject, of} = require('rxjs');
-const server = require('../server');
 var fs = require('fs');
 const notification = require('../notification');
 
@@ -18,6 +17,7 @@ var service = {
                 text: 'Welcome to Node Project',
                 html: '<strong>and easy to do anywhere, even with Node.js</strong>',
               });
+              notification.smsService();
               ob.next(user);
             }
             ob.complete();
