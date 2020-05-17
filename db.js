@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
+const config = require('config');
 
-const server = '127.0.0.1:27017'; 
-const database = 'db1';   
+const dbConfig = config.get('dbConfig');
+
+const server = `${dbConfig.host}:${dbConfig.port}`; 
+const database = dbConfig.dbName;   
 
 class Database {
     constructor() {
