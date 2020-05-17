@@ -12,7 +12,6 @@ test('Login Test', (done) => {
         .expect('Content-Type', /json/)
         /* .expect('Content-Length', '15') */
         .expect(200)
-        .expect()
         .end(function (err, res) {
             if (err) throw err;
             done();
