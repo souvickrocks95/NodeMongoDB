@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var db = require('./db');
 var UserController = require('./controller/usercontroller');
 const authController = require('./controller/authController');
 const taskController = require('./controller/taskController');

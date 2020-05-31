@@ -1,19 +1,39 @@
 const request = require('supertest');
 const app = require('../app');
 
-test('Login Test', (done) => {
+test('User Create Test', (done) => {
     request(app)
-        .post('/auth/login')
+        .post('/users')
         .send({
-            "email" : "arijit@gmail.com",
-            "password" : "arijit"
+            "name": "Sam",
+            "email": "souvick123@mailinator.com",
+            "password": "1234"
         })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         /* .expect('Content-Length', '15') */
         .expect(200)
         .end(function (err, res) {
-            if (err) throw err;
+            //if (err) throw err;
+            console.log(res)
+            done();
+        });
+})
+
+test('Login Test', (done) => {
+    request(app)
+        .post('/auth/login')
+        .send({
+            "email": "souvick123@mailinator.com",
+            "password": "1234"
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        /* .expect('Content-Length', '15') */
+        .expect(200)
+        .end(function (err, res) {
+            //if (err) throw err;
+            console.log(res)
             done();
         });
 })

@@ -1,25 +1,31 @@
 var mongoose = require('mongoose');
 const config = require('config');
-
+const mongoCon = require('./config/mongoConfig');
 const dbConfig = config.get('dbConfig');
+const dbConfigenv = config.get('env');
 
-const server = `${dbConfig.host}:${dbConfig.port}`; 
-const database = dbConfig.dbName;   
+const server = `${dbConfig.host}:${dbConfig.port}`;
+const database = dbConfig.dbName;
 
 class Database {
-    constructor() {
-      this.connect()
-    }
+  constructor() {
+    this.connect()
+  }
 
-    connect() {
-        mongoose.connect(`mongodb://${server}/${database}`)
-          .then(() => {
-            console.log('Database connection successful')
-          })
-          .catch(err => {
-            console.error('Database connection error')
-          })
-     }
-   }
-   
-   module.exports = new Database()
+  connect() {
+    console.log(dbConfigenv);
+    if (dbConfigenv === 'Test') {
+      mongoCon();
+    } else {
+      mongoose.connect(`mongodb://${server}/${database}`)
+        .then(() => {
+          console.log('Database connection successful')
+        })
+        .catch(err => {
+          console.error('Database connection error')
+        })
+    }
+  }
+}
+
+module.exports = new Database()
