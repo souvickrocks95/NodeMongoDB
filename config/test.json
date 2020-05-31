@@ -1,8 +1,8 @@
 {
-    "dbConfig": {
-        "host": "localhost",
-        "port": 27017,
-        "dbName": "db1"
-      },
-      "env" : "Test"
+  "dbConfig": {
+    "host": "localhost",
+    "port": 27017,
+    "dbName": "db1"
+  },
+  "env": "Test"
 }

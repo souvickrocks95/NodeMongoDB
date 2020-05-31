@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
+const testMongoConfig = require('../config/mongoConfig');
 
 test('User Create Test', (done) => {
     request(app)
@@ -14,8 +15,7 @@ test('User Create Test', (done) => {
         /* .expect('Content-Length', '15') */
         .expect(200)
         .end(function (err, res) {
-            //if (err) throw err;
-            console.log(res)
+            if (err) throw err;
             done();
         });
 })
@@ -32,8 +32,11 @@ test('Login Test', (done) => {
         /* .expect('Content-Length', '15') */
         .expect(200)
         .end(function (err, res) {
-            //if (err) throw err;
-            console.log(res)
+            if (err) throw err;
             done();
         });
 })
+
+afterAll(async () => {
+    testMongoConfig.stopServer();
+});

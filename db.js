@@ -8,24 +8,16 @@ const server = `${dbConfig.host}:${dbConfig.port}`;
 const database = dbConfig.dbName;
 
 class Database {
-  constructor() {
-    this.connect()
-  }
 
-  connect() {
-    console.log(dbConfigenv);
-    if (dbConfigenv === 'Test') {
-      mongoCon();
-    } else {
-      mongoose.connect(`mongodb://${server}/${database}`)
-        .then(() => {
-          console.log('Database connection successful')
-        })
-        .catch(err => {
-          console.error('Database connection error')
-        })
-    }
+  static connect() {
+    mongoose.connect(`mongodb://${server}/${database}`)
+      .then(() => {
+        console.log('Database connection successful')
+      })
+      .catch(err => {
+        console.error('Database connection error');
+      })
   }
 }
 
-module.exports = new Database()
+module.exports = Database;

@@ -27,7 +27,8 @@
   },
   "devDependencies": {
     "jest": "^26.0.1",
-    "supertest": "^4.0.2",
-    "node-embedded-mongodb": "0.0.3"
+    "mongodb-memory-server": "^6.6.1",
+    "node-embedded-mongodb": "0.0.3",
+    "supertest": "^4.0.2"
   }
 }
