@@ -16,10 +16,10 @@ function create() {
     console.log(mongod.getInstanceInfo());
 }
 
-function stopServer() {
+async function stopServer() {
     if (mongod != null)
         await mongod.stop();
 }
 
 //connect();
-module.exports = {create, stopServer};
+module.exports = { create, stopServer };
